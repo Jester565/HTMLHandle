@@ -15,7 +15,7 @@ Translation to simpler C++ Code
 -- Volker Grabsch <vog@notjusthosting.com>
 */
 
-#include "sha1.h"
+#include "SHA1.h"
 #include <sstream>
 #include <iomanip>
 #include <fstream>
@@ -80,7 +80,6 @@ namespace websocket
 
 		if (orig_size > BLOCK_BYTES - 8)
 		{
-			std::cout << "HI" << std::endl;
 			transform(block);
 			for (unsigned int i = 0; i < BLOCK_INTS - 2; i++)
 			{
@@ -91,7 +90,6 @@ namespace websocket
 		/* Append total_bits, split this uint64 into two uint32 */
 		block[BLOCK_INTS - 1] = total_bits;
 		block[BLOCK_INTS - 2] = (total_bits >> 32);
-		std::cout << "HI" << std::endl;
 		transform(block);
 		std::vector<unsigned char> hash(20, 0);
 		for (std::size_t i = 0; i < hash.size(); ++i)
@@ -99,11 +97,6 @@ namespace websocket
 			hash[i] = (unsigned char)(digest[i >> 2] >> 8 * (3 - (i & 0x03)));
 		}
 
-		for (int i = 0; i < hash.size(); i++)
-		{
-			std::cout << hash.at(i);
-		}
-		std::cout << std::endl;
 		return hash;
 	}
 
@@ -225,11 +218,6 @@ namespace websocket
 		digest[3] += d;
 		digest[4] += e;
 
-		for (int i = 0; i < 5; i++)
-		{
-			std::cout << digest[i] << std::endl;
-		}
-
 		/* Count the number of transformations */
 		transforms++;
 	}
@@ -253,7 +241,7 @@ namespace websocket
 		char* sbuf = new char[max];
 		is.read(sbuf, max);
 		s.assign(sbuf, is.gcount());
-		delete sbuf;
+		delete[] sbuf;
 	}
 
 

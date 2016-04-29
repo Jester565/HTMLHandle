@@ -2,6 +2,7 @@
 #define WEBSOCKET_DATAFRAME_HPP
 
 #include <vector>
+#include <cstdint>
 
 namespace websocket
 {

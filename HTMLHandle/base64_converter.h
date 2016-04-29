@@ -9,7 +9,7 @@ namespace websocket
 	class Base64
 	{
 	public:
-		static std::string to_base64(std::vector <unsigned char>& data);
+		static std::string to_base64(std::vector <unsigned char> data);
 
 	private:
 		static const std::string base64Chars;

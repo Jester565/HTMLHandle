@@ -2,6 +2,7 @@
 #include "dataframe.h"
 #include "dataframe_parser.h"
 #include <utility>
+#include <boost/make_shared.hpp>
 
 namespace websocket
 {
@@ -10,7 +11,7 @@ namespace websocket
 		df_parser = new dataframe_parser();
 	}
 
-	dataframe* dataframe_manager::parse_data(const std::vector <unsigned char>& data, size_t size)
+  boost::shared_ptr<dataframe> dataframe_manager::parse_data(const std::vector <unsigned char>& data, unsigned int size)
 	{
 		std::vector <unsigned char>::const_iterator end;
 		if (size == USE_VEC_SIZE) {
@@ -19,7 +20,7 @@ namespace websocket
 		else {
 			end = data.begin() + size;
 		}
-		dataframe* df = new dataframe();
+		boost::shared_ptr<dataframe> df = boost::make_shared<dataframe>();
 		std::pair <tribool, std::vector <unsigned char>::const_iterator> pResult = df_parser->parse(*df, data.begin(), end);
 		tribool result = pResult.first;
 		if (result)
@@ -31,5 +32,7 @@ namespace websocket
 
 	dataframe_manager::~dataframe_manager()
 	{
+	  delete df_parser;
+	  df_parser = nullptr;
 	}
 }

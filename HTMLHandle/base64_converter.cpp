@@ -6,7 +6,7 @@ namespace websocket
 	const std::string Base64::base64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 		"abcdefghijklmnopqrstuvwxyz"
 		"0123456789+/";
-	std::string Base64::to_base64(std::vector <unsigned char>& data)
+	std::string Base64::to_base64(std::vector <unsigned char> data)
 	{
 		std::string result;
 		result.reserve(data.size());

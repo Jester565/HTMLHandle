@@ -1,4 +1,5 @@
 #include <vector>
+#include <boost/shared_ptr.hpp>
 
 namespace websocket
 {
@@ -8,11 +9,11 @@ namespace websocket
 	class dataframe_manager
 	{
 	public:
-		const static size_t USE_VEC_SIZE = 0;
+		const static unsigned int USE_VEC_SIZE = 0;
 
 		dataframe_manager();
 
-		dataframe* parse_data(const std::vector <unsigned char>& data, size_t size);
+		boost::shared_ptr<dataframe> parse_data(const std::vector <unsigned char>& data, unsigned int size);
 
 		~dataframe_manager();
 
