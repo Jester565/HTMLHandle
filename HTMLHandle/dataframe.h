@@ -11,6 +11,7 @@ namespace websocket
 	public:
 		dataframe();
 
+		dataframe(dataframe& df);
 		bool fin;
 		enum operation_code { continuation_frame, text_frame, binary_frame, connection_close, ping, pong, reserved } opcode;
 		bool mask;

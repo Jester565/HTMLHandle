@@ -1,11 +1,29 @@
 #include "dataframe.h"
 #include "dataframe_parser.h"
+#include <iostream> //temp include
 
 namespace websocket
 {
 	dataframe::dataframe() : fin(true),
 		opcode(binary_frame), mask(false), fin_opcode(0),
 		mask_payload_len(0), payload_len(0), extended_payload_len16(0), extended_payload_len64(0) {}
+
+	dataframe::dataframe(dataframe& df)
+	{
+		fin = df.fin;
+		mask = df.mask;
+		fin_opcode = df.fin_opcode;
+		mask_payload_len = df.mask_payload_len;
+		payload_len = df.payload_len;
+		extended_payload_len16 = df.extended_payload_len16;
+		extended_payload_len64 = df.extended_payload_len64;
+		for (int i = 0; i < 4; i++)
+		{
+			masking_key[i] = df.masking_key[i];
+		}
+		payload = df.payload;
+		std::cout << "COPY CONSTRUCTOR CALLED";
+	}
 
 	std::vector<uint8_t> dataframe::to_buffer()
 	{
