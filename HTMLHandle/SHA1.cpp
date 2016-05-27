@@ -15,8 +15,6 @@ Translation to simpler C++ Code
 -- Volker Grabsch <vog@notjusthosting.com>
 */
 
-//test
-
 #include "SHA1.h"
 #include <sstream>
 #include <iomanip>
