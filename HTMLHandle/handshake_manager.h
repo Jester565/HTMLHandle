@@ -17,6 +17,8 @@ namespace websocket
 
 		reply parse_handshake(const std::vector <unsigned char>& data, size_t size = USE_VEC_SIZE);
 
+		reply parse_handshake(unsigned char* data, size_t size);
+
 		~handshake_manager();
 
 	protected:

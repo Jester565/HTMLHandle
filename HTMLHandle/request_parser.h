@@ -2,6 +2,7 @@
 #define WEBSOCKET_SERVER_REQUEST_PARSER_HPP
 
 #include <utility>
+#include <stdint.h>
 #include "tribool.h"
 
 namespace websocket
@@ -36,6 +37,19 @@ namespace websocket
 			}
 			tribool result = indeterminate;
 			return std::make_pair(result, begin);
+		}
+
+		template <typename Data>
+		std::pair<tribool, Data> parseArray(request& req,
+				Data begin, uint32_t size)
+		{
+				for (int i = 0; i < size; i++) {
+						tribool result = consume(req, *begin++);
+						if (result || !result)
+								return std::make_pair(result, begin);
+				}
+				tribool result = indeterminate;
+				return std::make_pair(result, begin);
 		}
 
 	private:

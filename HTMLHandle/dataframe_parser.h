@@ -29,6 +29,20 @@ namespace websocket
 			return std::make_pair(result, begin);
 		}
 
+		template <typename Data>
+		std::pair<tribool, Data> parseArray(dataframe& frame,
+				Data begin, uint32_t size)
+		{
+				reset();
+				for (int i = 0; i < size; i++) {
+						tribool result = consume(frame, *begin++);
+						if (result || !result)
+								return std::make_pair(result, begin);
+				}
+				tribool result = indeterminate;
+				return std::make_pair(result, begin);
+		}
+
 		static uint16_t ntoh16(uint16_t net16);
 
 		static uint16_t hton16(uint16_t net16);

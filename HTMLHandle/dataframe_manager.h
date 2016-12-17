@@ -15,6 +15,8 @@ namespace websocket
 
 		boost::shared_ptr<websocket::dataframe> parse_data(const std::vector <unsigned char>& data, unsigned int size);
 
+		boost::shared_ptr<websocket::dataframe> parse_data(unsigned char* data, unsigned int size);
+
 		~dataframe_manager();
 
 	protected:

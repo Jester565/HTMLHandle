@@ -34,6 +34,21 @@ namespace websocket
 		return reply::stock_reply(reply::bad_request);
 	}
 
+	reply handshake_manager::parse_handshake(unsigned char * data, size_t size)
+	{
+			request req;
+			tribool result;
+			std::pair<tribool, unsigned char*> rPair = req_parser->parseArray(req, data, size);
+			result = rPair.first;
+			if (result)
+			{
+					reply rep;
+					request_handler::handle_request(req, rep);
+					return rep;
+			}
+			return reply::stock_reply(reply::bad_request);
+	}
+
 	handshake_manager::~handshake_manager()
 	{
 		delete req_parser;
