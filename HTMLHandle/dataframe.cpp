@@ -58,6 +58,7 @@ namespace websocket
 		}
 		else if (payload.size() < 65536)
 		{
+				std::cout << "Payload send 2" << std::endl;
 			mask_payload_len = 126;
 			extended_payload_len16 = static_cast<uint16_t>(payload.size());
 			extended_payload_len16 = dataframe_parser::hton16(extended_payload_len16);
